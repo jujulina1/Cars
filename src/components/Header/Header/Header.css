@@ -1,0 +1,41 @@
+ nav {
+    background-color: #161c34;
+    overflow: hidden;
+    padding-top: 30px;
+    height: 100px;
+ 
+}
+
+#profile, #guest {
+    float: right;
+}
+
+/* Style the links inside the navigation bar */
+
+ nav a {
+    float: left;
+    color: #fff;
+    text-align: center;
+    padding: 14px 16px;
+    font-size: 22px;
+    border: 2px solid #161c34;
+    border-radius: 10px; 
+}
+
+/* Change the color of links on hover */
+
+nav a:hover {
+    background-color: #fff;
+    color: black;
+}
+
+/* Add a color to the active/current link */
+
+nav a.active {
+    background-color: #f36b2a;
+    color: #fff;
+}
+.welcome:hover {
+    background-color:  #f36b2a;
+} 
+
