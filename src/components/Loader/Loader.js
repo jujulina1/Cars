@@ -7,7 +7,7 @@ export default function Loader() {
         <div className={styles.loader_bg}>
             <p className={styles.paragraph}>Loading....</p>
             <div className={styles.loader}>
-                <img src="images/loading.gif" alt="loader" />
+                <img src="../../../images/loading.gif" alt="loader" />
             </div>
             
         </div>

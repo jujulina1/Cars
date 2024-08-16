@@ -26,17 +26,11 @@ export const ContextProvider = ({
 
                 throw new Error(data.message)
             }
-            console.log(auth);
             setAuth(data);
-            console.log(auth);
-
-         
-            //navigate to home
-
-            navigate('/')
+            navigate('/');
 
         } catch (error) {
-            console.log(error.message);
+           
             alert(error.message);
             navigate ('/login')
 
@@ -51,16 +45,12 @@ export const ContextProvider = ({
          // console.log(values);
          const response = await register({ ...inputs })
          const data = await response.json();
-         console.log(data);
+         
          if (response.status !== 200) {
 
              throw new Error(data.message)
          }
-         console.log(auth);
-
          setAuth(data);
-         console.log(auth);
-
          navigate('/')
 
      } catch (error) {
@@ -78,9 +68,9 @@ export const ContextProvider = ({
         try {
            const response = await logout(accessToken);
            if (response.status === 204) {
-            console.log(auth);
-               setAuth({});
-            console.log(auth);
+            
+            setAuth({});
+           
 
               
            }else {

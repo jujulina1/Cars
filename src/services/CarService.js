@@ -58,4 +58,34 @@ export async function deleteCar(carId, accessToken){
    }
    return await fetch(`${url}/data/cars/${carId}`, options)
 }
+// Comment service
+export async function createComment(comment, carId, accessToken) {
+
+ 
+   const options = {
+      method: 'post',
+      headers: {
+          'Content-Type': 'application/json',
+          'X-Authorization': accessToken
+      },
+    body: JSON.stringify( comment )
+  }
+  
+   return await fetch(`${url}/data/comments/${carId}`, options)
+  
+
+}
+
+// GET COMMENTS OF CURRENT CAR
+export async function getAllComments(carId) {
+    
+
+   const response = await fetch(`${url}/data/comments/${carId}`);
+   const data = await response.json();
+   return data;
+
+   //TEST With no Comments
+   //return []
+
+}
 

@@ -68,3 +68,12 @@ export async function editProfile({username, email, gender}, userId, accessToken
     return await fetch(`${url}/users/profile/${userId}`, options)
 
 }
+
+export async function getUsers() {
+
+  
+    const response =  await fetch(`${url}/users`);
+    return await response.json();
+
+
+}

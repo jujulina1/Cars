@@ -140,10 +140,7 @@ export default function ProfileEdit() {
                                 <button type='submit' className={styles.button_list} disabled={button}>Save</button>
                                 
                         </div>
-                        {/* <div className={styles.listings_buttons} >
-                        <button type='submit' className={styles.button_list} disabled={button}>Edit</button>
-
-                    </div> */}
+                  
                     </div>
                 </form>
             </div>

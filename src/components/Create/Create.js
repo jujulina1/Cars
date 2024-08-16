@@ -5,7 +5,7 @@ import styles from '../Create/Create.module.css'
 import  { useAuthContext } from '../../contexts/AuthContext'
 import { createCar } from '../../services/CarService';
 import { checkErrors, checkStatusButton } from '../../utils/checkErrors';
-import Loader from '../Loader/Loader';
+// import Loader from '../Loader/Loader';
 
 
 export default function Create() {

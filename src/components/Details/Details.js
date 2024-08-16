@@ -1,32 +1,46 @@
 import styles from '../Details/Details.module.css'
 import { useEffect, useState } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom"
-import { getCarById, deleteCar } from "../../services/CarService";
+import { getCarById, deleteCar, getAllComments } from "../../services/CarService";
 import { useAuthContext } from '../../contexts/AuthContext'
 import Loader from "../Loader/Loader";
+import CommentList from '../Comments/CommentList/CommentList';
+import { getUsers } from '../../services/AuthService';
+
+
+
 
 export default function Details() {
 
     const { carId } = useParams();
     const context = useAuthContext();
     const navigate = useNavigate();
-    const [loader, setLoader] = useState(true); //if Loader
-    const [creator, setCreator] = useState("");
-
-
     const [car, setCar] = useState({});
+    const [comments, setComments] = useState([]);
+    const [loader, setLoader] = useState(true); //if Loader
+    const [isOwner, setIsOwner] = useState("");
+    const [users, setUsers] = useState([]);
+
+
+
     useEffect(() => {
 
 
         getCarById(carId)
             .then(data => {
-                console.log(data);
                 setCar(data);
-                setCreator(data.userId)
-                setLoader(false)
-            })
+                setLoader(false);
+                setIsOwner(data.userId === context._id ? true : false)
+            });
+        getAllComments(carId)
+            .then(comments => {
+                setComments(comments);
+                
+            }) ;
+        getUsers()
+           .then(users => setUsers(users))   
 
-    }, [carId])
+    }, [carId, context])
 
     const onDelete = async () => {
 
@@ -65,19 +79,21 @@ export default function Details() {
 
                             <p className={styles.description_para}>{car.description}</p>
                             {
-                                context._id === creator ?
+                                  isOwner &&
 
                                     <div className={styles.listings_buttons} >
                                         <Link to={`/edit/${carId}`} className={styles.button_list}>Edit</Link>
                                         <Link to={`/delete/${carId}`} className={styles.button_list} onClick={onDelete}>Delete</Link>
                                     </div>
-                                    : null
+                                   
                             }
                         </div>
                     </div>
 
                 </section>
             }
+          <CommentList carId={carId} isOwner={isOwner} comments={comments} users={users}/>
+    
         </>
 
     )

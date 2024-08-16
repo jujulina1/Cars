@@ -23,6 +23,7 @@ import Profile from './components/Profile/Profile/Profile';
 import ProfileEdit from './components/Profile/ProfileEdit/ProfileEdit';
  import Loader from './components/Loader/Loader';
 
+
 function App() {
   return (
     <>
@@ -39,7 +40,8 @@ function App() {
             <Header />
            
             <div id="content">
-
+             
+            
             
               <Routes>
 

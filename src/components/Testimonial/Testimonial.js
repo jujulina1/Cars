@@ -19,7 +19,7 @@ export default function Testimonial() {
                                     <div className="testomonial_section">
                                         <div className="full center">
                                             <div className="client_img">
-                                                <img src="images/testimonial.png" alt="testimonial.png" />
+                                                <img src="../../../images/testimonial.png" alt="testimonial.png" />
                                             </div>
                                         </div>
                                         <div className="full testimonial_cont text_align_center">
