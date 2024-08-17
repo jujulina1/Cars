@@ -2,7 +2,7 @@ export function checkErrors(elementName, elementValue) {
 
     let regex = '';
     let message = '';
-
+  
     switch (elementName) {
         case 'brand':
             if (elementValue.length === 0) {
@@ -58,7 +58,7 @@ export function checkErrors(elementName, elementValue) {
             }
             break;
         default: 
-        message = 'OOops, something gets wrong';
+        
         break;
 
     }

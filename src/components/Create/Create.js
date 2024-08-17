@@ -47,7 +47,7 @@ export default function Create() {
          navigate('/catalog')
         
        } catch (error) {
-        console.log(error);
+       
         alert(error.message);
          //TO DO ERRORS
        }

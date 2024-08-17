@@ -63,10 +63,7 @@ export default function Edit() {
 
     const onChangeHandler= (e) => {
         e.preventDefault();
-        // console.log(e.target.name);
-        // console.log(e.target.value);
-        // console.log(values);
-        // console.log("ONCHANGEHAndler");
+       
         let message = checkErrors(e.target.name, e.target.value);
       
         setErrors(state => ({...state, [e.target.name]: message}))

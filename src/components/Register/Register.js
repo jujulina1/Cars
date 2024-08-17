@@ -28,7 +28,7 @@ export default function Register() {
 
 
     useEffect(() => {
-        console.log('UseEffect');
+        
         setButton(checkStatusButton(errors, values))
        
     }, [errors, values])

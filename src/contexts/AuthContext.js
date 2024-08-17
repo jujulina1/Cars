@@ -1,5 +1,4 @@
 import { createContext, useContext } from "react";
-import { useNavigate } from 'react-router-dom';
 import { login, register, logout } from '../services/AuthService';
 import { useLocalStorage } from "../hooks/useLocalStorage";
 
@@ -38,7 +37,7 @@ export const ContextProvider = ({
     const onRegisterSubmit = async (inputs) => {
 
     
-         // console.log(values);
+         
          const response = await register({ ...inputs })
          const data = await response.json();
          
@@ -56,7 +55,7 @@ export const ContextProvider = ({
       //// ----- LOGOUT --------////
 
       const onLogout = async (accessToken) => {
-        console.log(accessToken);
+       
         try {
            const response = await logout(accessToken);
            if (response.status === 204) {

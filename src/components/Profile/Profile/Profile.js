@@ -3,13 +3,15 @@ import { Link } from 'react-router-dom'
 import styles from '../Profile/Profile.module.css'
 import { useAuthContext } from '../../../contexts/AuthContext'
 import { getProfile } from '../../../services/AuthService';
-import { chooseAvatar } from '../../../utils/chooseAvatar'
+import { chooseAvatar } from '../../../utils/chooseAvatar';
+import Loader from '../../Loader/Loader';
+
 
 export default function Profile() {
 
 
     const context = useAuthContext();
-   
+
 
 
     const [user, setUser] = useState({
@@ -17,7 +19,8 @@ export default function Profile() {
         email: '',
         gender: 'male'
     });
-    const [avatar, setAvatar] = useState('')
+    const [avatar, setAvatar] = useState('');
+    const [loader, setLoader] = useState(true);
 
 
     useEffect(() => {
@@ -25,40 +28,44 @@ export default function Profile() {
         getProfile(context.accessToken)
             .then(data => {
                 setUser(data);
+                setLoader(false);
                 setAvatar(chooseAvatar(data.gender))
             })
     }, [context.accessToken]);
 
-  return (
-        <section className='background'>
-            <div className={styles.container}>
+    return (
+        <>{loader ? <Loader /> :
+            <section className='background'>
+                <div className={styles.container}>
 
-                <div className={styles.profile}><img src={avatar} alt="default user" />
-                    <h2 style={{ fontWeight: 'bolder' }}>User Info:</h2>
+                    <div className={styles.profile}><img src={avatar} alt="default user" />
+                        <h2 style={{ fontWeight: 'bolder' }}>User Info:</h2>
 
-                    <div className={styles.icons} >
-                        <p style={{ fontWeight: '600' }}>Username: </p>
-                        <p>{user.username}</p>
-                    </div>
-                    <div className={styles.icons}>
-                        <p style={{ fontWeight: '600' }}>Email: </p>
-                        <p>{user.email}</p>
-                    </div>
+                        <div className={styles.icons} >
+                            <p style={{ fontWeight: '600' }}>Username: </p>
+                            <p>{user.username}</p>
+                        </div>
+                        <div className={styles.icons}>
+                            <p style={{ fontWeight: '600' }}>Email: </p>
+                            <p>{user.email}</p>
+                        </div>
 
-                    <div className={styles.icons}>
-                        <p style={{ fontWeight: '600' }}>Gender: </p>
-                        <p>{user.gender}</p>
-                    </div>
+                        <div className={styles.icons}>
+                            <p style={{ fontWeight: '600' }}>Gender: </p>
+                            <p>{user.gender}</p>
+                        </div>
 
-                    
-                    <div className={styles.listings_buttons} >
-                            <Link to= {`/profile/edit/${context._id}`} className={styles.button_list}>Edit</Link>
-                               
+
+                        <div className={styles.listings_buttons} >
+                            <Link to={`/profile/edit/${context._id}`} className={styles.button_list}>Edit</Link>
+
+                        </div>
+
                     </div>
 
                 </div>
-
-            </div>
-        </section>
+            </section>
+        }
+        </>
     )
 }

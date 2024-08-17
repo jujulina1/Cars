@@ -18,7 +18,7 @@ export default function Catalog() {
 
             .then(data => {
                 setCars(data);
-                setLoader(false)
+                setLoader(false);
             });
 
 

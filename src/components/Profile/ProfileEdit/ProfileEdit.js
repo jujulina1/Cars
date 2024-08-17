@@ -5,6 +5,8 @@ import { getProfile, editProfile } from '../../../services/AuthService';
 import { useAuthContext } from '../../../contexts/AuthContext'
 import { chooseAvatar } from '../../../utils/chooseAvatar';
 import { checkErrors, checkStatusButton } from '../../../utils/checkErrors';
+import Loader from "../../Loader/Loader";
+
 
 
 
@@ -17,6 +19,7 @@ export default function ProfileEdit() {
 
     const [option, setOption] = useState('male');//set gender
     const [avatar, setAvatar] = useState('');
+    const [loader, setLoader] = useState(true);
 
 
     const [user, setUser] = useState({
@@ -32,19 +35,20 @@ export default function ProfileEdit() {
 
 
     useEffect(() => {
-        console.log('UseEfect');
+        
         getProfile(context.accessToken)
         .then(data => {
             
             setUser(data);
-            setOption(data.gender)
-            console.log(chooseAvatar(data.gender));
+            setOption(data.gender);
+            setLoader(false);
             setAvatar(chooseAvatar(data.gender))
+           
         })
     },[context.accessToken])
     useEffect(() => {
         
-       
+    
         setButton(checkStatusButton(errors, user));
         
        
@@ -72,7 +76,7 @@ export default function ProfileEdit() {
 
      const onChangeHandler = (e) => {
       
-        let targetName = e.target.name
+        let targetName = e.target.name;
         
         if (targetName === 'female' || targetName === 'male' || targetName === 'gender') {
             targetName = 'gender';
@@ -82,12 +86,14 @@ export default function ProfileEdit() {
         let message = checkErrors(targetName, e.target.value);
         setErrors(state => ({...state, [targetName]: message}))
         setUser(state => ({...state, [targetName]: e.target.value}));
-        console.log(user);
+       
         
          
      }
  
     return (
+       <>
+       {loader ? <Loader /> :
         <section className='background'>
             <div className={styles.container}>
                 <form onSubmit={onSubmit}>
@@ -145,5 +151,7 @@ export default function ProfileEdit() {
                 </form>
             </div>
         </section>
+}
+      </>  
     )
 }

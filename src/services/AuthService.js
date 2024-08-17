@@ -1,7 +1,7 @@
 const url = `http://localhost:3000`
 
 export async function login({username, password}) {
-    console.log(username);
+    
     
     const options = {
         method: 'post',
