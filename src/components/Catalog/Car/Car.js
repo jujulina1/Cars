@@ -17,7 +17,7 @@ export default function Car({
 
                 <img src={image} alt="Audi A3" />
             </div>
-            <h2>{brand} {model}</h2>
+            <h2>{brand}</h2>
             <div className={styles.info}>
                 <div className={styles.info}>
                     <h3>Year: {year}</h3>

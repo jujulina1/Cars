@@ -11,59 +11,51 @@ export const ContextProvider = ({
 
     const [auth, setAuth] = useLocalStorage('auth', {});
     
-    const navigate = useNavigate();
+
 
   //// ----- LOGIN -------/////
+  
+
     const onLoginSubmit = async (inputs) => {
         
 
-        try {
+       
             
             const response = await login({ ...inputs })
             const data = await response.json();
-            console.log(data);
+            
             if (response.status !== 200) {
 
-                throw new Error(data.message)
+                return new Error(data.message)
             }
             setAuth(data);
-            navigate('/');
-
-        } catch (error) {
-           
-            alert(error.message);
-            navigate ('/login')
-
-        }
+            return data;
+       
 
     }
   //// ----- REGISTER -------/////
 
     const onRegisterSubmit = async (inputs) => {
 
-    try {
+    
          // console.log(values);
          const response = await register({ ...inputs })
          const data = await response.json();
          
          if (response.status !== 200) {
 
-             throw new Error(data.message)
+             return new Error(data.message)
          }
          setAuth(data);
-         navigate('/')
-
-     } catch (error) {
-
-         alert(error.message);
-         navigate ('/register')
+         return data;
+   
 ;
-     }
+     
 
 } 
       //// ----- LOGOUT --------////
 
-    const onLogout = async (accessToken) => {
+      const onLogout = async (accessToken) => {
         console.log(accessToken);
         try {
            const response = await logout(accessToken);
@@ -80,7 +72,7 @@ export const ContextProvider = ({
 
        } catch (error) {
            alert(error.message);
-           navigate('/')
+          
        }
      
    }

@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../contexts/AuthContext';
 import { checkErrors, checkStatusButton, matchPassword } from '../../utils/checkErrors';
 import styles from '../Register/Register.module.css'
@@ -24,6 +24,7 @@ export default function Register() {
     });
     const [button, setButton] = useState(false);
     const context = useContext(AuthContext);
+    const navigate = useNavigate();
 
 
     useEffect(() => {
@@ -60,11 +61,19 @@ export default function Register() {
        
     }
 
-    const onSubmit = (e) => {
-
-        e.preventDefault();
-        context.onRegisterSubmit((values));
-     
+    const onSubmit = async (e) => {
+        
+            e.preventDefault();
+            try {
+                await context.onRegisterSubmit((values));
+                navigate('/');
+                setValues(initialValues);
+            } catch (error) {
+                window.alert(error.message);
+                navigate('/register');
+            }
+            
+       
     }
 
     return (

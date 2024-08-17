@@ -12,7 +12,7 @@ export default function Logout() {
     useEffect(() => {
         context.onLogout(context.accessToken);
         
-    },[context]) 
+    },[context])
 
     return (
         <Navigate to={'/'} replace={true}/>

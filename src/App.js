@@ -21,7 +21,7 @@ import Create from './components/Create/Create';
 import PageNotFound from './components/404/PageNotFound';
 import Profile from './components/Profile/Profile/Profile';
 import ProfileEdit from './components/Profile/ProfileEdit/ProfileEdit';
- import Loader from './components/Loader/Loader';
+ //import Loader from './components/Loader/Loader';
 
 
 function App() {

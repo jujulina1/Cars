@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect } from 'react';
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import styles from '../Login/Login.module.css'
 import { AuthContext } from '../../contexts/AuthContext';
 import { checkErrors, checkStatusButton } from '../../utils/checkErrors';
@@ -14,6 +14,7 @@ export default function Login() {
     const [errors, setErrors] = useState(initialValues);
     const [button, setButton] = useState(false);//true, false//Login button to be disable ot not
     const context = useContext(AuthContext);
+    const navigate = useNavigate();
    
     useEffect(() => {
         
@@ -29,10 +30,17 @@ export default function Login() {
         setValues(state => ({ ...state, [e.target.name]: e.target.value }));
 
     }
-    const onSubmit = (e) => {
+    const onSubmit = async (e) => {
         e.preventDefault();
-        context.onLoginSubmit((values));
-        setValues(initialValues);
+        try {
+            await context.onLoginSubmit((values));
+            navigate('/');
+            setValues(initialValues);
+        } catch (error) {
+            window.alert(error.message);
+            navigate('/login');
+        }
+        
     }
 
     return (
